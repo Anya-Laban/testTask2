@@ -1,0 +1,54 @@
+.orderBlock {
+  background-color: #F7F7F9;
+  padding: 12px 16px;
+  border-radius: 8px;
+  color: var(--c-primary);
+}
+
+.orderTitle {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.orderDesc {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.divider {
+  display: block;
+  margin-block: 16px;
+  height: 1px;
+  background-color: #E0E2EA;
+}
+
+.totalPrice {
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--c-primary);
+  text-align: end;
+
+}
+
+.price {
+  font-weight: 600;
+}
+
+.separator {
+  font-weight: 500;
+}
+
+.month {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+@media (min-width: 1000px) {
+  .orderBlock {
+    flex: 1 1 50%;
+    height: min-content;
+    width: 420px;
+  }
+}

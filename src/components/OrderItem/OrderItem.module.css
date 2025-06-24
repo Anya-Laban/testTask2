@@ -1,0 +1,14 @@
+
+.title {
+  color: var(--c-primary);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.desc {
+  color: #797E8B;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+}

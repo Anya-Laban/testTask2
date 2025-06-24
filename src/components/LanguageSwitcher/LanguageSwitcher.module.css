@@ -1,0 +1,44 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.button {
+  padding: 8px;
+  border: none;
+  background: none;
+  cursor: pointer;
+
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: center;
+  color: var(--c-primary);
+}
+
+.desktop {
+  display: none;
+}
+
+.mobile {
+  display: flex;
+}
+
+@media (min-width: 1000px) {
+  .desktop {
+    display: flex;
+  }
+
+  .mobile {
+    display: none;
+  }
+
+  .button {
+    color: var(--c-secondary);
+  }
+
+  .button_active {
+    color: var(--c-primary);
+  }
+
+}

@@ -1,0 +1,112 @@
+.button {
+  position: relative;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  padding: 16px 12px;
+  border-radius: 6px;
+  border: none;
+  background-color: hsl(144, 97%, 27%);
+  color: white;
+  width: 100%;
+  transition: 
+    background-color 80ms ease-in,
+    transform 80ms ease-in;
+}
+
+.button:hover {
+  background-color: hsl(144, 97%, 31%);
+  transform: translateY(-2px);
+}
+
+.button:active {
+  background-color: hsl(144, 97%, 19%);
+  transform: translateY(4px);
+}
+
+.button.button_loading {
+  background-color: hsl(144, 97%, 23%);
+  transform: translateY(2px);
+  transition: 
+    background-color 120ms ease-out,
+    transform 120ms ease-out;
+}
+
+.mainContent {
+  display: block;
+}
+
+.button_loading > .mainContent {
+  animation: textDisappearance 120ms ease-out 1 normal forwards;
+}
+
+.processingContent {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 12px;
+  width: 100%;
+  left: 0;
+  transform: translateY(16px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.processingContent::before {
+  content: '';
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  box-sizing: border-box;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.button_loading > .processingContent {
+  animation: textAppearance 120ms ease-out 1 normal forwards;
+}
+
+@keyframes textDisappearance {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: translateY(-8px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+}
+
+@keyframes textAppearance {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: translateY(8px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(-22px);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,123 @@
+.header {
+  display: none;
+}
+
+.trialText {
+  text-align: center;
+}
+
+.daysCountInfo {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: 0%;
+}
+
+.priceInfo {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.paymentOptions {
+  margin-top: 24px;
+}
+
+.applePayBtn {
+  width: 100%;
+  padding-block: 14px;
+  background-color: black;
+  border-radius: 3px;
+}
+
+.divider {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.divider > span {
+  width: max-content;
+  line-height: 24px;
+  letter-spacing: 0%;
+  color: var(--c-secondary);
+}
+
+.divider::before, .divider::after {
+  content: '';
+  display: block;
+  flex: 1 1 auto;
+  height: 1px;
+  background-color: #E4E6EC;
+}
+
+.cardForm {
+  margin-top: 16px;
+}
+
+.cardDetails {
+  margin-block: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.checkoutNote {
+  margin-top: 8px;
+  border: 1px solid #E4E6EC;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--c-secondary);
+}
+
+.checkoutNote > strong {
+  font-weight: 600;
+}
+
+@media (min-width: 1000px) {
+  .header {
+    display: flex;
+    position: relative;
+    align-items: center;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 40px;
+  }
+
+  .header__btnBack {
+    position: absolute;
+    display: flex;
+    right: 100%;
+    width: 24px;
+    height: 24px;
+    padding: 8px;
+  }
+
+  .header__btnBack > img {
+    width: 100%;
+  }
+
+  .checkoutBlock {
+    flex: 1 1 50%;
+    width: 420px;
+  }
+  
+  .trialText {
+    text-align: start;
+  }
+
+  .daysCountInfo {
+    font-size: 32px;
+    line-height: 40px;
+  }
+
+  .priceInfo {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}

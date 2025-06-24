@@ -1,0 +1,77 @@
+.inputBlock {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.labelText {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--c-secondary);
+}
+
+.inputBox {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 12px;
+  border: 1px solid #C7C9D1;
+  box-shadow: 0px 2px 4px -2px #0000001F;
+  border-radius: 6px;
+}
+
+.inputBoxError {
+  border: 1px solid rgb(197, 44, 44);
+}
+
+.inputBox:focus-within {
+  border: 1px solid var(--c-primary);
+}
+
+.input {
+  width: 100%;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0%;
+  color: var(--c-primary);
+  border: none;
+}
+
+.input::placeholder {
+  color: var(--c-secondary);
+}
+
+.input:focus {
+  outline: none;
+}
+
+.error {
+  visibility: hidden;
+  opacity: 0;
+  width: max-content;
+  max-width: 220px;
+  background-color: #fff;
+  color: var(--c-secondary);
+  text-align: left;
+  border-radius: 6px;
+  padding: 8px 12px;
+  position: absolute;
+  z-index: 10;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  line-height: 1.4;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.inputBlock:hover .error{
+  visibility: visible;
+  opacity: 1;
+}
