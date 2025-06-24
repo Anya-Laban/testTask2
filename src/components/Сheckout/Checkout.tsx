@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Input } from "../Input";
 import { MainButton } from "../MainButton";
+import arrowBackImg from "../../assets/arrow-back.svg";
+import applePayImg from "../../assets/apple-pay.svg";
 import s from "./Checkout.module.css";
-import arrowBackImg from '../../assets/arrow-back.svg';
-import applePayImg from '../../assets/apple-pay.svg';
+import { Trans, useTranslation } from "react-i18next";
 
 const defaultFormData = {
   cardNumber: "",
@@ -16,6 +17,7 @@ type Props = {
 };
 
 export const Checkout: React.FC<Props> = ({ totalPrice }) => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState(defaultFormData);
   const [formErrors, setFormErrors] = useState(defaultFormData);
   const [isSendingData, setIsSendingData] = useState(false);
@@ -25,15 +27,32 @@ export const Checkout: React.FC<Props> = ({ totalPrice }) => {
     setFormErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
-  const isCardDateValid = (val: string): boolean => {
-    if (!/^\d{2}\/\d{2}$/.test(val)) return false;
+  const validateCardDate = (val: string): string | null => {
+    if (!/^\d{2}\/\d{2}$/.test(val)) {
+      return t("invalidFormatMMYY");
+    }
+
     const [monthStr, yearStr] = val.split("/");
     const month = parseInt(monthStr, 10);
     const year = parseInt("20" + yearStr, 10);
+
+    if (isNaN(month) || isNaN(year)) {
+      return t("invalidMonthYearNumber");
+    }
+
+    if (month < 1 || month > 12) {
+      return t("invalidMonthRange");
+    }
+
     const now = new Date();
     const currentMonth = now.getMonth() + 1;
     const currentYear = now.getFullYear();
-    return month >= 1 && month <= 12 && (year > currentYear || (year === currentYear && month >= currentMonth));
+
+    if (year < currentYear || (year === currentYear && month < currentMonth)) {
+      return t("cardExpired");
+    }
+
+    return null;
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -43,15 +62,18 @@ export const Checkout: React.FC<Props> = ({ totalPrice }) => {
     const errors = { cardNumber: "", date: "", cvc: "" };
 
     if (formData.cardNumber.replace(/\s/g, "").length !== 16) {
-      errors.cardNumber = "Номер карти не вірний";
+      errors.cardNumber = t("invalidCardNumber");
       valid = false;
     }
-    if (!isCardDateValid(formData.date)) {
-      errors.date = "Дата не вірна або минула";
+
+    const errorMessageDate = validateCardDate(formData.date);
+    if (errorMessageDate) {
+      errors.date = errorMessageDate;
       valid = false;
     }
+
     if (formData.cvc.length !== 3) {
-      errors.cvc = "CVC має містити 3 цифри";
+      errors.cvc = t("invalidCVC");
       valid = false;
     }
     setFormErrors(errors);
@@ -61,10 +83,10 @@ export const Checkout: React.FC<Props> = ({ totalPrice }) => {
       setIsSendingData(true);
       setTimeout(() => {
         if (Math.random() < 0.6) {
-          resolve("Дані надіслано: " + JSON.stringify(formData, null, 2));
+          resolve("Data sent: " + JSON.stringify(formData, null, 2));
           setFormData(defaultFormData);
         } else {
-          reject("Виникли проблеми");
+          reject("Problems arose.");
         }
       }, 5000);
     })
@@ -79,14 +101,14 @@ export const Checkout: React.FC<Props> = ({ totalPrice }) => {
         <a className={s.header__btnBack} href="/">
           <img src={arrowBackImg} alt="Back button" />
         </a>
-        <h2 className={s.header__title}>Checkout</h2>
+        <h2 className={s.header__title}>{t("checkout")}</h2>
       </header>
 
       <section className={s.subscriptionInfo}>
         <p className={s.trialText}>
-          <strong className={s.daysCountInfo}>5 days free</strong>
+          <strong className={s.daysCountInfo}>{t("fiveDaysFree")}</strong>
           <br />
-          <span className={s.priceInfo}>then 299.99 UAH per 14 days</span>
+          <span className={s.priceInfo}>{t("pricePlan")}</span>
         </p>
       </section>
 
@@ -96,12 +118,12 @@ export const Checkout: React.FC<Props> = ({ totalPrice }) => {
         </button>
 
         <div className={s.divider}>
-          <span>or pay with card</span>
+          <span>{t("orPayWithCard")}</span>
         </div>
 
         <form className={s.cardForm} onSubmit={handleSubmit}>
           <Input
-            label="Card Number"
+            label={t("cardNumberLabel")}
             placeholder="1234 1234 1234 1234"
             name="cardNumber"
             type="text"
@@ -113,8 +135,8 @@ export const Checkout: React.FC<Props> = ({ totalPrice }) => {
 
           <div className={s.cardDetails}>
             <Input
-              label="Expiration Date"
-              placeholder="MM/YY"
+              label={t("expirationDateLabel")}
+              placeholder={t("expirationDatePlaceholder")}
               name="date"
               type="text"
               value={formData.date}
@@ -124,30 +146,28 @@ export const Checkout: React.FC<Props> = ({ totalPrice }) => {
             />
 
             <Input
-              label="CVC"
+              label={t("cvcLabel")}
               placeholder="•••"
               name="cvc"
               type="password"
               value={formData.cvc}
               onValueChange={handleChange}
               patternMask="###"
-              iconRightTitle="3-значний код на звороті вашої картки"
+              iconRightTitle={t("cvcIconRightTitle")}
               errorMessage={formErrors.cvc}
             />
           </div>
 
           <MainButton
             type="submit"
-            text={`Pay ${totalPrice} UAH`}
+            text={t("payButtonText", { price: totalPrice })}
             isLoading={isSendingData}
           />
         </form>
       </section>
 
       <p className={s.checkoutNote}>
-        You'll have your <strong>Plan Pro during 1 year</strong>. After this
-        period of time, your plan will be <strong>automatically renewed</strong>{" "}
-        with its original price without any discounts applied.
+        <Trans i18nKey="planInfo" components={{ strong: <strong /> }} />
       </p>
     </div>
   );

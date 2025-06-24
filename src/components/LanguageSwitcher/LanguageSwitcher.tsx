@@ -1,6 +1,6 @@
-import { useState } from "react";
 import s from "./LanguageSwitcher.module.css";
 import classNames from "classnames";
+import { useTranslation } from "react-i18next";
 
 type Lang = "en" | "ua";
 
@@ -10,10 +10,18 @@ const LangLabels: Record<Lang, string> = {
 };
 
 export const LanguageSwitcher = () => {
-  const [language, setLanguage] = useState<Lang>("ua");
+  const { i18n } = useTranslation();
+  const currentLang: Lang = i18n.language.startsWith("en") ? "en" : "ua";
+
+  const changeLang = (lang: Lang) => {
+    console.log(lang);
+    
+    i18n.changeLanguage(lang);
+  };
 
   const toggleLang = () => {
-    setLanguage((prev) => (prev === "en" ? "ua" : "en"));
+    const newLang: Lang = currentLang === "en" ? "ua" : "en";
+    changeLang(newLang);
   };
 
   return (
@@ -21,25 +29,25 @@ export const LanguageSwitcher = () => {
       <div className={s.desktop}>
         <button
           className={classNames(s.button, {
-            [s.button_active]: language === "en",
+            [s.button_active]: currentLang === "en",
           })}
-          onClick={() => setLanguage("en")}
+          onClick={() => changeLang("en")}
         >
-          {LangLabels["en"]}
+          {LangLabels.en}
         </button>
         <button
           className={classNames(s.button, {
-            [s.button_active]: language === "ua",
+            [s.button_active]: currentLang === "ua",
           })}
-          onClick={() => setLanguage("ua")}
+          onClick={() => changeLang("ua")}
         >
-          {LangLabels["ua"]}
+          {LangLabels.ua}
         </button>
       </div>
 
       <div className={s.mobile}>
         <button onClick={toggleLang} className={s.button}>
-          {LangLabels[language]}
+          {LangLabels[currentLang]}
         </button>
       </div>
     </div>

@@ -32,15 +32,6 @@
   color: var(--c-primary);
 }
 
-.header__lang {
-  background-color: inherit;
-  border: 0;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 24px;
-  color: var(--c-primary);
-}
-
 .main {
   flex: 1 1 auto;
   display: flex;
@@ -62,7 +53,6 @@
   line-height: 20px;
   color: var(--c-secondary);
 }
-
 
 @media (min-width: 452px) {
   .main {
