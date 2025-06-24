@@ -1,5 +1,5 @@
-[DEMO LINK](https://Anya-Laban.github.io/testTask_solidgate/)
-[A design for project](https://www.figma.com/file/WuqFxnT1z0od3XRFiz6yBx/Your-test-is-here-%3B)
+- [DEMO LINK](https://Anya-Laban.github.io/testTask_solidgate/)
+- [A design for project](https://www.figma.com/file/WuqFxnT1z0od3XRFiz6yBx/Your-test-is-here-%3B)
 
 A responsive payment page built with React and TypeScript. 
 It includes the following features:
