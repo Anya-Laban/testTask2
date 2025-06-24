@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import classNames from "classnames";
 import s from "./Input.module.css";
-import infoImg from '../../assets/info.svg';
+import infoImg from "../../assets/info.svg";
 
 const applyMask = (digits: string, pattern: string) => {
   let result = "";

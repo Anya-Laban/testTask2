@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "../Input";
 import { MainButton } from "../MainButton";
 import arrowBackImg from "../../assets/arrow-back.svg";
@@ -17,7 +17,7 @@ type Props = {
 };
 
 export const Checkout: React.FC<Props> = ({ totalPrice }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [formData, setFormData] = useState(defaultFormData);
   const [formErrors, setFormErrors] = useState(defaultFormData);
   const [isSendingData, setIsSendingData] = useState(false);
@@ -94,6 +94,27 @@ export const Checkout: React.FC<Props> = ({ totalPrice }) => {
       .catch((err) => window.alert(err as string))
       .finally(() => setIsSendingData(false));
   };
+
+  useEffect(() => {
+    setFormErrors((prevErrors) => {
+      const updatedErrors = { ...prevErrors };
+
+      if (prevErrors.cardNumber) {
+        updatedErrors.cardNumber = t("invalidCardNumber");
+      }
+
+      if (prevErrors.date) {
+        const newDateError = validateCardDate(formData.date);
+        updatedErrors.date = newDateError || "";
+      }
+
+      if (prevErrors.cvc) {
+        updatedErrors.cvc = t("invalidCVC");
+      }
+
+      return updatedErrors;
+    });
+  }, [i18n.language]);
 
   return (
     <div className={s.checkoutBlock}>

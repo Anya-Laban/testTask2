@@ -14,8 +14,6 @@ export const LanguageSwitcher = () => {
   const currentLang: Lang = i18n.language.startsWith("en") ? "en" : "ua";
 
   const changeLang = (lang: Lang) => {
-    console.log(lang);
-    
     i18n.changeLanguage(lang);
   };
 

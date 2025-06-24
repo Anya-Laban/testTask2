@@ -2,15 +2,16 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
 const resources = {
-en: {
+  en: {
     translation: {
       checkout: "Checkout",
       poweredBy: "Powered by",
       fiveDaysFree: "5 days free",
       pricePlan: "then 299.99 UAH per 14 days",
       orPayWithCard: "or pay with card",
-      planInfo: "You'll have your <strong>Plan Pro during 1 year</strong>. After this period of time, your plan will be <strong>automatically renewed</strong> with its original price without any discounts applied.",
-      
+      planInfo:
+        "You'll have your <strong>Plan Pro during 1 year</strong>. After this period of time, your plan will be <strong>automatically renewed</strong> with its original price without any discounts applied.",
+
       cardNumberLabel: "Card Number",
       expirationDateLabel: "Expiration Date",
       cvcLabel: "CVC",
@@ -27,7 +28,7 @@ en: {
       orderInfoTitle: "Order info (≤ 100 char.)",
       orderInfoDescription: "Description (≤ 400 char.)",
       perMonth: "month",
-    }
+    },
   },
   ua: {
     translation: {
@@ -36,8 +37,9 @@ en: {
       fiveDaysFree: "5 днів безкоштовно",
       pricePlan: "тоді 299,99 грн. за 14 днів",
       orPayWithCard: "або оплатити картою",
-      planInfo: "Ви матимете свій <strong>Plan Pro протягом 1 року</strong>. Після цього періоду ваш план буде <strong>автоматично поновлений</strong> за початковою ціною без жодних знижок.",
-    
+      planInfo:
+        "Ви матимете свій <strong>Plan Pro протягом 1 року</strong>. Після цього періоду ваш план буде <strong>автоматично поновлений</strong> за початковою ціною без жодних знижок.",
+
       cardNumberLabel: "Номер картки",
       expirationDateLabel: "Термін дії",
       cvcLabel: "CVC",
@@ -54,18 +56,16 @@ en: {
       orderInfoTitle: "Інформація про замовлення (≤ 100 символів)",
       orderInfoDescription: "Опис (≤ 400 символів)",
       perMonth: "місяць",
-    }
-  }
+    },
+  },
 };
 
-i18n
-  .use(initReactI18next)
-  .init({
-    resources,
-    lng: "en", 
-    interpolation: {
-      escapeValue: false
-    }
-  });
+i18n.use(initReactI18next).init({
+  resources,
+  lng: "en",
+  interpolation: {
+    escapeValue: false,
+  },
+});
 
 export default i18n;
